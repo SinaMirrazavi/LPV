@@ -72,6 +72,7 @@ before_install:
   - source /opt/ros/$ROS_DISTRO/setup.bash
   # Prepare rosdep to install dependencies.
   - sudo rosdep init
+  - sudo apt-get install --reinstall python-catkin-pkg
   - rosdep update
 
 # Create a catkin workspace with the package under integration.
