@@ -2,7 +2,7 @@
 This package provides a c++ library for Gaussian Mixtire Model (GMM) based Linear Parameter Varying (LPV) systems . 
 
 
- Dependences 
+# Dependences 
 
 - Eigen http://eigen.tuxfamily.org/index.php?title=Main_Page
 
