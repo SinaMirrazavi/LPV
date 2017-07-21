@@ -113,9 +113,6 @@ script:
   - source devel/setup.bash
   - rospack profile
   - cd ~/catkin_ws
-  - cd src/robot-toolkit
- # - tar -xvzf minimal.tgz
-  - cd ../..
   - source devel/setup.bash
   - rospack profile
   - catkin_make $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
