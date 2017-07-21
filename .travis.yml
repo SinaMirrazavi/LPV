@@ -71,6 +71,7 @@ before_install:
   - sudo apt-get install ros-indigo-desktop-full
   - source /opt/ros/indigo/setup.bash
   # Prepare rosdep to install dependencies.
+  - pip install catkin_pkg
   - sudo rosdep init
   - rosdep update
 
