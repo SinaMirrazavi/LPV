@@ -1,5 +1,5 @@
 # LPV
-[![Build Status](https://travis-ci.org/sinamr66/LPV.svg?branch=master)](https://travis-ci.org/sinamr66/LPV)
+[![Build Status](https://travis-ci.org/sinamr66/LPV.svg?branch=master)](https://travis-ci.org/sinamr66/LPV) [![DOI](https://zenodo.org/badge/97956089.svg)](https://zenodo.org/badge/latestdoi/97956089)
 
 This package provides a c++ library for Gaussian Mixtire Model (GMM) based Linear Parameter Varying (LPV) systems . 
 
