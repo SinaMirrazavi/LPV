@@ -33,30 +33,27 @@ The ``lpvDS`` class can read these parameters in different formats:
 - Text files: A text file of each parameter is needed.
 - Yaml file: A single yaml file with all the parameters in single vector format.
 
-Examples of these files are provided in the ``models/`` folder. To generate these files follow the ``demo_learn_lpvDS.m`` script in the [ds-opt](https://github.com/nbfigueroa/ds-opt) package.
+Examples of these files are provided in the ``models/`` folder. To generate these files follow the ``demo_learn_lpvDS.m`` script in the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. Once you have your lpv-DS model, you can either initialize an instance of the lpv-DS class as follows:
 
+- For text file:
+```
+lpvDS.initialize(int K,int M);
+lpvDS.initialize_A(const char *path_A_);
+lpvDS.initialize_b(const char *path_b_);
+lpvDS.initialize_gamma(const char *path_prior_,const char *path_mu_,const char *path_sigma_);
+```
+Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
-In the format requested by ```svm_grad``` class, this can be generated with the ```writeSVMGradModel.m``` function in the matlab folder, then:
-```
-SVMGrad svm_(modelFilename);
-x = load vector...              // Could Eigen::VectorXd or arma::vec<double> format
-svm_.preComputeKernel(true);    // For fast derivative computation
-gamma       = svm_.calculateGamma(x);
-gamma_grad  = svm_.calculateGammaDerivative(x);
-```
+- For Yaml file: We assume that a Yaml file has been read via the ROS parameter server and each parameters is of ``std::vector<double>`` format
 
-## How to run LPV
-By initializing the LPV-DS , a GMM is automatically constructed; i.e. 
 ```
-LPV.initialize(int Num_Com,int Num_state);
-```
-Num_Com is the number of the components and 
-Num_state is the dimension of the system
-```
-LPV.initialize_A(const char *path_);
-LPV.initialize_theta(const char *path_prior_,const char *path_mu_,const char *path_sigma_);
+lpvDS.initialize(int K,int M);
+lpvDS.initialize_A(std::vector<double> *A_);
+lpvDS.initialize_b(std::vector<double> *b_);
+lpvDS.initialize_gamma(std::vector<double> *Priors_, std::vector<double> *Mu_ ,std::vector<double> *Sigma_);
 ```
 
+... continue modifying!
 ### In the loop:
 ```
 LPV.Calculate_A(VectorXd X)
