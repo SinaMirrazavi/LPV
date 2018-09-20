@@ -1,8 +1,8 @@
 # LPV
 This package provides a C++ library for evaluation of Gaussian Mixture Model (GMM) based Linear Parameter Varying (LPV) systems; i.e. GMM-based LPV-DS which have been used in introduced in [1,2,3]. This version of the LPV library focuses on the formulation proposed in [3] where a non-linear DS formulated as:
 <p align="center">
-<img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif">
-</>
+<img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif"></>
+  
 with global stability constraints derived from either a:
 - QLF (Quadratic Lyapunov Function): ``A_k+A_k' < 0, b_k = -A_k*b_k for all k=1:K``
 - P-QLF(Parametrized QLF): ``A_k'P + PA_k' < Q_k, b_k = -A_k*b_k, P>0, Q_k<0 for all k=1:K``
