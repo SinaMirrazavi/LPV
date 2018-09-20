@@ -12,7 +12,7 @@ is learned from demonstrations while ensuring global aymptotic stability derived
 Such formulation and learning approach, proposed in [3], enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
 
 <p align="center">
-<img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-CShape-bottom_lpvO3.png"  width="220"><img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-Sink_lpvO3.png"  width="220"></>
+<img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-CShape-bottom_lpvO3.png"  width="320"><img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-Sink_lpvO3.png"  width="320"></>
 
 
 while ensuring global asymptotic stability. To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package.
