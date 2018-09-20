@@ -9,7 +9,7 @@ is learned from demonstrations while ensuring global asymptotic stability derive
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
 - P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
 
-Such formulation and learning approach, proposed in [3], enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
+This formulation, together with the learning approach proposed in [3], enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
 
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-CShape-bottom_lpvO3.png"  width="350"><img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-Sink_lpvO3.png"  width="350"></>
