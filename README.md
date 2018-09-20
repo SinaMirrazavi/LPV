@@ -18,7 +18,7 @@ Such formulation and learning approach, proposed in [3], enables the accurate en
 while ensuring global asymptotic stability. To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package.
 
 ### Installation (Catkin package)
-These instrutions are assuming you have a ROS environment and use catkin workspace to compile code. 
+By following these instructions, we assume you have a ROS environment and use catkin workspace to compile code. 
 Clone this respository in your ```./src``` folder and make sure that you have the [eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) library. Then, compile the package
 ```
 $ cd ~/catkin_ws/
