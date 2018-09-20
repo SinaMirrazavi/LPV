@@ -9,7 +9,10 @@ is learned from demonstrations while ensuring global aymptotic stability derived
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
 - P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
 
-To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package.
+Such formulation and learning approach, proposed in [3], enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
+
+
+while ensuring global asymptotic stability. To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package.
 
 ### Installation (Catkin package)
 These instrutions are assuming you have a ROS environment and use catkin workspace to compile code. 
