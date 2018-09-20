@@ -1,7 +1,7 @@
 # LPV
 [![Build Status](https://travis-ci.org/sinamr66/LPV.svg?branch=master)](https://travis-ci.org/sinamr66/LPV) [![DOI](https://zenodo.org/badge/97956089.svg)](https://zenodo.org/badge/latestdoi/97956089)
 
-This package provides a c++ library for Gaussian Mixtire Model (GMM) based Linear Parameter Varying (LPV) systems . 
+This package provides a C++ library for evaluation of Gaussian Mixture Model (GMM) based Linear Parameter Varying (LPV) systems; i.e. GMM-based LPV-DS which are have been used in introduced in [1,2,3].
 
 
 # Dependences 
@@ -54,17 +54,8 @@ GMM.initialize_GMM(const char  *path_prior_,const char  *path_mu_,const char  *p
 ```
 GMM.PDF(VectorXd X)
 ```
-For more information contact Sina Mirrazavi. 
-## Copyright
-Please cite these papers if you are using this toolbox:
 
-@ARTICLE{7439839,
-author={S. S. M. Salehian and M. Khoramshahi and A. Billard},
-journal={IEEE Transactions on Robotics},
-title={A Dynamical System Approach for Softly Catching a Flying Object: Theory and Experiment},
-year={2016},
-volume={32},
-number={2},
-pages={462-471},
-ISSN={1552-3098},
-month={April},}
+**References**     
+> [1] Mirrazavi Salehian, S. S., Khoramshahi, M. and Billard, A. (2016) A Dynamical System Approach for Catching Softly a Flying Object: Theory and Experiment. in IEEE Transactions on Robotics, vol. 32, no. 2, pp. 462-471, April 2016.
+> [2] Mirrazavi Salehian, S. S. (2018) Compliant control of Uni/ Multi- robotic arms with dynamical systems. PhD Thesis
+> [3] Figueroa, N. and Billard, A. (2018) A Physically-Consistent Bayesian Non-Parametric Mixture Model for Dynamical System Learning. In Proceedings of the 2nd Conference on Robot Learning (CoRL). Accepted.     
