@@ -5,7 +5,7 @@ This version of the LPV library focuses on the formulation proposed in [3] where
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif"></>
   
-is learned from demonstrations while ensuring global aymptotic stability derived from either a:
+is learned from demonstrations while ensuring global asymptotic stability derived from either a:
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
 - P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
 
