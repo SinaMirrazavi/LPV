@@ -4,11 +4,8 @@ This package provides a C++ library for evaluation of Gaussian Mixture Model (GM
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif"></>
   
 with global stability constraints derived from either a:
-- QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif>
-- P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif>
-
-## Features:
-Implementation of GMM and LPV. 
+- QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
+- P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
 
 ### Installation (Catkin package)
 These instrutions are assuming you have a ROS environment and use catkin workspace to compile code. 
