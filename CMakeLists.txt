@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(lpv)
+project(lpvDS)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -99,7 +99,7 @@ set(CMAKE_CXX_FLAGS "-std=c++11")
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES lpv
+  LIBRARIES lpvDS
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package>
-  <name>lpv</name>
+  <name>lpvDS</name>
   <version>0.0.0</version>
-  <description>The lpv package</description>
+  <description>The lpvDS package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="sina@todo.todo">sina</maintainer>
+  <maintainer email="nadia@todo.todo">nadia</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
