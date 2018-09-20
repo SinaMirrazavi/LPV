@@ -4,8 +4,8 @@ This package provides a C++ library for evaluation of Gaussian Mixture Model (GM
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif"></>
   
 with global stability constraints derived from either a:
-- QLF (Quadratic Lyapunov Function): ``A_k+A_k' < 0, b_k = -A_k*b_k for all k=1:K``
-- P-QLF(Parametrized QLF): ``A_k'P + PA_k' < Q_k, b_k = -A_k*b_k, P>0, Q_k<0 for all k=1:K``
+- QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif>
+- P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif>
 
 ## Features:
 Implementation of GMM and LPV. 
