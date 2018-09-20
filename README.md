@@ -1,4 +1,4 @@
-# LPV
+# lpvDS-lib
 This package provides a C++ library for evaluation of Gaussian Mixture Model (GMM) based Linear Parameter Varying (LPV) Dynamical Systems; i.e. GMM-based LPV-DS which have been used and introduced in [1,2,3]. 
 
 This version of the LPV library focuses on the formulation proposed in [3] where a non-linear DS formulated as:
