@@ -28,6 +28,7 @@ $ catkin_make
 First and foremost, one must have a GMM-based LPV-DS model, which requires the following parameters:
 - GMM parameters: ``Priors``, ``Mu``,``Sigma``
 - DS parameters:  ``A_k``,``b_k``
+
 The ``lpvDS`` class can read these parameters in different formats:
 - Text files: A text file of each parameter is needed.
 - Yaml file: A single yaml file with all the parameters in single vector format.
