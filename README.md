@@ -5,9 +5,7 @@ This version of the LPV library focuses on the formulation proposed in [3] where
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif"></>
   
-is learned from demonstrations in a decoupled manner. Where the GMM parameters used to parametrize 
-
-while ensuring global asymptotic stability via constraints derived from either a:
+is learned from demonstrations in a decoupled manner. Where the GMM parameters <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/theta_gamma.gif"> used to parametrize <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/gamma.gif"> are estimated via the physically-consistent GMM approach proposed in [3] and provided in [phys-gmm](https://github.com/nbfigueroa/phys-gmm) and the DS parameters are estimated via semidefinit programming while ensuring global asymptotic stability via constraints derived from either a:
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
 - P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
 
