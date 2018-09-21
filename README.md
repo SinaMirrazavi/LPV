@@ -1,11 +1,13 @@
 # lpvDS-lib
-This package provides a C++ library for evaluation of Gaussian Mixture Model (GMM) based Linear Parameter Varying (LPV) Dynamical Systems; i.e. GMM-based LPV-DS which have been used and introduced in [1,2,3]. 
+This package provides a C++ library for execution of Gaussian Mixture Model (GMM) based Linear Parameter Varying (LPV) Dynamical Systems; i.e. GMM-based LPV-DS which have been used and introduced in [1,2,3]. 
 
 This version of the LPV library focuses on the formulation proposed in [3] where a non-linear DS formulated as:
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif"></>
   
-is learned from demonstrations while ensuring global asymptotic stability via constraints derived from either a:
+is learned from demonstrations in a decoupled manner. Where the GMM parameters used to parametrize 
+
+while ensuring global asymptotic stability via constraints derived from either a:
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
 - P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
 
