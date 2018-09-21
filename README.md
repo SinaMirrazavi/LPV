@@ -30,7 +30,7 @@ First and foremost, one must have a GMM-based LPV-DS model, which requires the f
 - DS parameters:  ``A_k``,``b_k``
 
 The ``lpvDS`` class can read these parameters in different formats:
-- Text files: A text file of each parameter is needed.; i.e. ``Priors.txt``,``Mu.txt``,``Sigma.txt``, ``A_k.txt``, ``b_k.txt``,``Attractor.txt``, ``Dimensions.txt``, where the last file should contain 2 numbers [K M] indicating the number of Gaussian components ``K`` and the dimensionality of the states ``M``.
+- Text files: A text file of each parameter is needed.; i.e. ``Priors.txt``,``Mu.txt``,``Sigma.txt``, ``A_k.txt``, ``b_k.txt``,``Attractor.txt``, ``Dimensions.txt``, where the last file should contain 2 numbers ``[K M]`` indicating the number of Gaussian components ``K`` and the dimensionality of the states ``M``.
 - Yaml file: A single yaml file with all the parameters mentioned above in vector format.
 
 Examples of these files are provided in the ``models/`` folder. To generate these files follow the ``demo_learn_lpvDS.m`` script in the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. Once you have your lpv-DS model, you can either initialize an instance of the lpv-DS class as follows:
