@@ -9,7 +9,7 @@ is learned from demonstrations in a decoupled manner. Where the GMM parameters <
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
 - P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
 
-This formulation, together with the learning approach proposed in [3], enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
+This formulation and learning approach enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
 
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-CShape-bottom_lpvO3.png"  width="350"><img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-Sink_lpvO3.png"  width="350"></>
@@ -30,8 +30,8 @@ First and foremost, one must have a GMM-based LPV-DS model, which requires the f
 - DS parameters:  ``A_k``,``b_k``
 
 The ``lpvDS`` class can read these parameters in different formats:
-- Text files: A text file of each parameter is needed.
-- Yaml file: A single yaml file with all the parameters in single vector format.
+- Text files: A text file of each parameter is needed.; i.e. ``Priors.txt``,``Mu.txt``,``Sigma.txt``, ``A_k.txt``, ``b_k.txt``,``Attractor.txt``, ``Dimensions.txt``, where the last file should contain 2 numbers ``[K M]`` indicating the number of Gaussian components ``K`` and the dimensionality of the states ``M``.
+- Yaml file: A single yaml file with all the parameters mentioned above in vector format.
 
 Examples of these files are provided in the ``models/`` folder. To generate these files follow the ``demo_learn_lpvDS.m`` script in the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. Once you have your lpv-DS model, you can either initialize an instance of the lpv-DS class as follows:
 
