@@ -61,10 +61,16 @@ Or you can read the parameter files using the ``fileUtils`` class and initialize
 ```
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
-- For Yaml file: We assume that a Yaml file has been read via the ROS parameter server and each parameters is of ``vector<double>`` format
+- For Yaml file: We assume that a Yaml file has been read via the ROS parameter server and each parameters is of ``vector<double>`` format from the C++ standard library.
 
 ```C++
-lpvDS lpvDS_(int K,int M,vector<double> Priors, vector<double> Mu, vector<double> Sigma, vector<double> A)
+vector<double> Priors = ...; /* Vector of Priors */
+vector<double> Mu = ...;    /* Mu as a long vector*/
+vector<double> Sigma = ...; /* Sigma as a long vector*/
+vector<double> A = ...;     /* A as a long vector*/
+int K = ...;                /* Number of components */
+int M = ...;                /* Dimensionality of the state */
+lpvDS lpvDS_(K,M, Priors, Mu, Sigma, A)
 ```
 
 ### In the loop:
