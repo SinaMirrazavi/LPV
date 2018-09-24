@@ -5,11 +5,10 @@ This version of the LPV library focuses on the formulation proposed in [3] where
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/f_x.gif"></>
   
-is learned from demonstrations in a decoupled manner. Where the GMM parameters <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/theta_gamma.gif"> used to parametrize <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/gamma.gif"> are estimated via the physically-consistent GMM approach proposed in [3] and provided in [phys-gmm](https://github.com/nbfigueroa/phys-gmm) and the DS parameters <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/DS_params.gif"> are estimated via semi-definite optimization problem that ensures global asymptotic stability of the system via constraints derived from either a:
+is learned from demonstrations in a decoupled manner. Where the GMM parameters <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/theta_gamma.gif"> used to parametrize <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/gamma.gif"> are estimated via the physically-consistent GMM approach proposed in [3] and provided in [phys-gmm](https://github.com/nbfigueroa/phys-gmm) and the DS parameters <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/DS_params.gif"> are estimated by solving a semi-definite optimization problem that ensures global asymptotic stability of the system via constraints derived from either a:
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
 - P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
-
-This formulation and learning approach enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
+The whole learning scheme is provided in [ds-opt](https://github.com/nbfigueroa/ds-opt). This formulation and learning approach enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
 
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-CShape-bottom_lpvO3.png"  width="350"><img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-Sink_lpvO3.png"  width="350"></>
@@ -61,7 +60,7 @@ Or you can read the parameter files using the ``fileUtils`` class and initialize
 ```
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
-- For Yaml file [Recommended]: We use the ROS parameter server which reads a yaml file containing each of the parameters mentioned above in  ``vector<double>`` format from the C++ standard library.
+- **For Yaml file [Recommended]:** We use the ROS parameter server which reads a yaml file containing each of the parameters mentioned above in  ``vector<double>`` format from the C++ standard library.
 
 ```C++
 vector<double> Priors = ...; /* Vector of Priors */
