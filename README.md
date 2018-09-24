@@ -60,7 +60,7 @@ Or you can read the parameter files using the ``fileUtils`` class and initialize
 ```
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
-- For Yaml file [Recommended]: We use the ROS parameter server which reads a yaml file containing each of the parameters mentioned above in  ``vector<double>`` format from the C++ standard library.
+- **For Yaml file [Recommended]:** We use the ROS parameter server which reads a yaml file containing each of the parameters mentioned above in  ``vector<double>`` format from the C++ standard library.
 
 ```C++
 vector<double> Priors = ...; /* Vector of Priors */
