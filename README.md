@@ -35,18 +35,29 @@ The ``lpvDS`` class can read these parameters in different formats:
 
 Examples of these files are provided in the ``models/`` folder. To generate these files follow the ``demo_learn_lpvDS.m`` script in the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. Once you have your lpv-DS model, you can either initialize an instance of the lpv-DS class as follows:
 
-- For text file:
+- For text files, you have multiple initialization options:
 ```C++
-    /* Instantiate an LPV-DS class Option 1 */
-    cout << "Initialization Test 1: " << endl;
-    lpvDS lpvDS_test1(path_dim.c_str());
-    lpvDS_test1.initialize_gamma(path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str());
-    lpvDS_test1.initialize_A(path_A.c_str());
-
-    /* Instantiate an LPV-DS class Option 2 */
-    cout << "Initialization Test 2: " << endl;
-    lpvDS lpvDS_test2 (path_dim.c_str(), path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str(), path_A.c_str());
+  lpvDS lpvDS_(path_dim.c_str());
+  lpvDS_.initialize_gamma(path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str());
+  lpvDS_.initialize_A(path_A.c_str());
 ```
+```C++
+    lpvDS lpvDS_ (path_dim.c_str(), path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str(), path_A.c_str());
+```
+Or you can read the parameter files using the ``fileUtils`` class available in this same repo and initialize the lpvDS class as follows:
+```C++
+    fileUtils fileUtils_;
+    MatrixXd dim, Priors, Mu, Sigma, A;
+    dim     = fileUtils_.readMatrix(path_dim.c_str());
+    Priors  = fileUtils_.readMatrix(path_Priors.c_str());
+    Mu      = fileUtils_.readMatrix(path_Mu.c_str());
+    Sigma   = fileUtils_.readMatrix(path_Sigma.c_str());
+    A       = fileUtils_.readMatrix(path_A.c_str());
+    int K = (int)dim(0,0);
+    int M = (int)dim(1,0);
+    lpvDS lpvDS_test3 (K, M, Priors, Mu, Sigma, A);
+```
+
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
 - For Yaml file: We assume that a Yaml file has been read via the ROS parameter server and each parameters is of ``std::vector<double>`` format
