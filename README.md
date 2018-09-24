@@ -78,14 +78,23 @@ function save_lpvDS_to_Yaml(DS_name, pkg_dir,  ds_gmm, A_k, att, x0_all, dt)
 
 ### In the loop:
 Once you have the lpvDS class instantiated and initialized in any of the available formats, you can use it in the loop as follows:
+- For ``Eigen::VectorXd`` type inputs:
 
 ```C++
 VectorXd att = ...;                        /* attractor */
 VectorXd xi  = ...;                        /* current state */
 Vextor Xd xi_dot;                          /* desired velocity */
+
+ /* Option 1: Computing desired velocity manually*/
 MatrixXd  A_matrix = lpv_DS_.compute_A(xi) /* computing the weight sum of A matrices */
 xi_dot = A_matrix*(xi - att);              /* computing the desired velocity */
+
+/* Option 2: Computing desired velocity directly*/
+xi_dot = lpvDS_.compute_f(xi_ref_test, att);
 ```
+- For ``Mathlib::vector`` type inputs:
+
+
 This is a minimalistic code, proper resizing of vectors and matrices must be implemented.
 
 ---
