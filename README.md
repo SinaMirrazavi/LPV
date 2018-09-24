@@ -36,11 +36,16 @@ The ``lpvDS`` class can read these parameters in different formats:
 Examples of these files are provided in the ``models/`` folder. To generate these files follow the ``demo_learn_lpvDS.m`` script in the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. Once you have your lpv-DS model, you can either initialize an instance of the lpv-DS class as follows:
 
 - For text file:
-```
-lpvDS.initialize(int K,int M);
-lpvDS.initialize_A(const char *path_A_);
-lpvDS.initialize_b(const char *path_b_);
-lpvDS.initialize_gamma(const char *path_prior_,const char *path_mu_,const char *path_sigma_);
+```C++
+    /* Instantiate an LPV-DS class Option 1 */
+    cout << "Initialization Test 1: " << endl;
+    lpvDS lpvDS_test1(path_dim.c_str());
+    lpvDS_test1.initialize_gamma(path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str());
+    lpvDS_test1.initialize_A(path_A.c_str());
+
+    /* Instantiate an LPV-DS class Option 2 */
+    cout << "Initialization Test 2: " << endl;
+    lpvDS lpvDS_test2 (path_dim.c_str(), path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str(), path_A.c_str());
 ```
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
