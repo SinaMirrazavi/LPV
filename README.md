@@ -56,7 +56,7 @@ Or you can read the parameter files using the ``fileUtils`` class available in t
     A       = fileUtils_.readMatrix(path_A.c_str());
     int K = (int)dim(0,0);
     int M = (int)dim(1,0);
-    lpvDS lpvDS_test_ (K, M, Priors, Mu, Sigma, A);
+    lpvDS lpvDS_ (K, M, Priors, Mu, Sigma, A);
 ```
 
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
@@ -64,12 +64,13 @@ Where ``K`` is the number of the Gaussian components and ``M`` is the dimension 
 - For Yaml file: We assume that a Yaml file has been read via the ROS parameter server and each parameters is of ``std::vector<double>`` format
 
 ```C++
-lpvDS lpvDS_test_(int K,int M,std::vector<double> *Priors_, std::vector<double> *Mu_ ,std::vector<double> *Sigma_,  std::vector<double> *A_)
+lpvDS lpvDS_(int K,int M,std::vector<double> *Priors_, std::vector<double> *Mu_ ,std::vector<double> *Sigma_,  std::vector<double> *A_)
 ```
 
 ### In the loop:
 Once you have the lpvDS class instantiated and initialiazed in any of the available formats, you can use it in the loop as follows:
-```
+
+```C++
 VectorXd att; /* attractor */
 VectorXd xi, /* current state */
 Vextor Xd xi_dot; xi_dot.resize(M); /* desired velocity */
@@ -85,14 +86,45 @@ rosrun lpvDS_lib test_lpvDS
 ```
 This test will load a stored lpv-DS model (the one that generates the C-Shape above) and the demonstrations that were used to traine it. It will check for numerical errors in the estimated velocities, you should see the following:
 ```
-bla bla bla..
-SVM Model: /home/nbfigueroa/dev/catkin_ws/src/SVMGrad/matlab/models/2d-example2-svm.txt
-model.D: 2
-model.nSV: 40
-model.b: -0.962694
-model.sigma: 0.1
+Initialization Test 1: 
+[File Dimensionality] row 2 1
+Initialized an M:3 dimensional GMM-based LPV-DS with K: 7 Components
+[File Dimensionality] row 1 7
+** Initializing Priors **
+[File Dimensionality] row 3 7
+** Initializing Mu **
+[File Dimensionality] row 21 3
+** Initializing Sigma **
+[File Dimensionality] row 21 3
+** Initializing A's' **
+Initialization Test 2: 
+[File Dimensionality] row 2 1
+Initialized an M:3 dimensional GMM-based LPV-DS with K: 7 Components
+[File Dimensionality] row 21 3
+** Initializing A's' **
+[File Dimensionality] row 1 7
+** Initializing Priors **
+[File Dimensionality] row 3 7
+** Initializing Mu **
+[File Dimensionality] row 21 3
+** Initializing Sigma **
+Initialization Test 3: 
+[File Dimensionality] row 2 1
+[File Dimensionality] row 1 7
+[File Dimensionality] row 3 7
+[File Dimensionality] row 21 3
+[File Dimensionality] row 21 3
+Initialized an M:3 dimensional GMM-based LPV-DS with K: 7 Components
+** Initializing A's' **
+** Initializing Priors **
+** Initializing Mu **
+** Initializing Sigma **
+Testing Accuracy of model...
+[File Dimensionality] row 3 1
+[File Dimensionality] row 6 2215
+[File Dimensionality] row 3 2215
+Average Estimation Error (Norm of predicted Matlab and C++ velocities): 0.00401846
 
-SVM Testing File: /home/nbfigueroa/dev/catkin_ws/src/SVMGrad/matlab/models/2d-example2-data.txt
 ```
 
 **References**     
