@@ -45,7 +45,7 @@ Examples of these files are provided in the ``models/`` folder. To generate thes
   /* Instantiate an LPV-DS class Option 2 */
   lpvDS lpvDS_ (path_dim.c_str(), path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str(), path_A.c_str());
 ```
-Or you can read the parameter files using the ``fileUtils`` class available and initialize the lpvDS class as follows:
+Or you can read the parameter files using the ``fileUtils`` class and initialize an lpvDS class instance as follows:
 ```C++
    /* Instantiate an LPV-DS class Option 3 */
    fileUtils fileUtils_;
