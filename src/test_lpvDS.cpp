@@ -63,11 +63,11 @@ main (int argc, char **argv)
     xi_ref.row(2)     = Data.row(2);
 
     /* Compute estimated velocities from model */
-    VectorXd xi_ref_test;  xi_ref_test.resize(3);
-    VectorXd xi_dot_test;  xi_dot_test.resize(3);
-    VectorXd xi_dot_mat;   xi_dot_mat.resize(3);
-    VectorXd xi_dot_error;   xi_dot_error.resize(3);
-    MatrixXd A_matrix; A_matrix.resize(3,2);
+    VectorXd xi_ref_test;  xi_ref_test.resize(M);
+    VectorXd xi_dot_test;  xi_dot_test.resize(M);
+    VectorXd xi_dot_mat;   xi_dot_mat.resize(M);
+    VectorXd xi_dot_error;   xi_dot_error.resize(M);
+    MatrixXd A_matrix; A_matrix.resize(M,M);
     VectorXd  est_error; est_error.resize(samples);
     for (int i=0; i<samples; i++){
 

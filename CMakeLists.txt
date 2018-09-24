@@ -76,7 +76,9 @@ add_library(${PROJECT_NAME} ${H_FILES}  ${SRCS})
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
 ## Declare a C++ executable
-add_executable(test_lpvDS src/test_lpvDS.cpp)
+add_executable(test_lpvDS      src/test_lpvDS.cpp)
+add_executable(test_lpvDS_node src/test_lpvDS_node.cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(test_lpvDS lpvDS ${catkin_LIBRARIES})
+target_link_libraries(test_lpvDS      lpvDS ${catkin_LIBRARIES})
+target_link_libraries(test_lpvDS_node lpvDS ${catkin_LIBRARIES})

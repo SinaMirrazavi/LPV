@@ -38,7 +38,7 @@ lpvDS::lpvDS(const char  *path_dims):K_(0),M_(0) {
 
     K_ = (int)fMatrix.coeff(0,0);
     M_ = (int)fMatrix.coeff(1,0);
-    initialize_params();
+    setup_params();
 }
 
 
@@ -61,21 +61,33 @@ lpvDS::lpvDS(const char  *path_dims, const char  *path_prior_,const char  *path_
 
     K_ = (int)fMatrix.coeff(0,0);
     M_ = (int)fMatrix.coeff(1,0);
-    initialize_params();
-    initialize_A(path_A_);
+    setup_params();
     initialize_gamma(path_prior_, path_mu_, path_sigma_);
+    initialize_A(path_A_);
 }
 
 
 lpvDS::lpvDS(int K, int M, const MatrixXd Priors_fMatrix, const MatrixXd Mu_fMatrix, const MatrixXd Sigma_fMatrix, const MatrixXd A_fMatrix ):K_(K),M_(M) {
 
-    /* Given the parameters directly, initialize all matrices*/
-    initialize_params();
-    initialize_A(A_fMatrix);
+    /* Given the parameters directly as MatrixXd, initialize all matrices*/
+    setup_params();
     initialize_Priors(Priors_fMatrix);
     initialize_Mu(Mu_fMatrix);
     initialize_Sigma(Sigma_fMatrix);
+    initialize_A(A_fMatrix);
 
+}
+
+
+lpvDS::lpvDS(const int K, const int M, const vector<double> Priors_vec, const vector<double> Mu_vec, const vector<double> Sigma_vec, const vector<double> A_vec):K_(K),M_(M){
+
+
+    /* Given the parameters directly as vector<double>, initialize all matrices*/
+    setup_params();
+    initialize_Priors_vec(Priors_vec);
+    initialize_Mu_vec(Mu_vec);
+    initialize_Sigma_vec(Sigma_vec);
+    initialize_A_vec(A_vec);
 }
 
 
@@ -83,7 +95,15 @@ lpvDS::~lpvDS(){
 
 }
 
-void lpvDS::initialize_params()
+void lpvDS::ERROR()
+{
+    while(ros::ok())
+    {
+
+    }
+}
+
+void lpvDS::setup_params()
 {
 
     /* Setup matrices */
@@ -97,26 +117,10 @@ void lpvDS::initialize_params()
     cout << "Initialized an M:" << M_ << " dimensional GMM-based LPV-DS with K: " << K_ << " Components" << endl;
 }
 
-void lpvDS::initialize_A(const MatrixXd fMatrix ){
 
-
-    cout<<"** Initializing A's' **"<< endl;
-    if ((fMatrix.rows()!=K_*M_)||(fMatrix.cols()!=M_))
-    {
-        cout<<"Initialization of the A matrices is wrong!!"<<endl;
-        cout<<"A_k: "<< endl << fMatrix<< endl;
-        cout<<"[Proposed Dimensionality] K : "<<K_<<" M:"<<M_<<endl;
-        cout<<"[Actual Dimensionality] K : "<< fMatrix.cols()/M_ <<" M:" << fMatrix.rows() << endl;
-        ERROR();
-    }
-    int j = 0;
-    for(int s=0; s<K_; s++ ){
-        for(int i=0; i<M_; i++ ){
-            A_Matrix_[s].row(i)=fMatrix.row(j);
-            j++;
-        }
-    }
-}
+/***************************************************/
+/* Initialization functions with MatrixXd as input */
+/***************************************************/
 
 void lpvDS::initialize_Priors(const MatrixXd fMatrix ){
 
@@ -133,6 +137,7 @@ void lpvDS::initialize_Priors(const MatrixXd fMatrix ){
         Prior_[i]=fMatrix(0,i);
 }
 
+
 void lpvDS::initialize_Mu(const MatrixXd fMatrix ){
 
     cout<<"** Initializing Mu **"<< endl;
@@ -147,7 +152,6 @@ void lpvDS::initialize_Mu(const MatrixXd fMatrix ){
     for(int s=0; s<K_; s++ )
         Mu_[s]=fMatrix.col(s);
 }
-
 
 void lpvDS::initialize_Sigma(const MatrixXd fMatrix ){
     cout<<"** Initializing Sigma **"<< endl;
@@ -171,6 +175,128 @@ void lpvDS::initialize_Sigma(const MatrixXd fMatrix ){
     }
 }
 
+void lpvDS::initialize_A(const MatrixXd fMatrix ){
+
+
+    cout<<"** Initializing A's' **"<< endl;
+    if ((fMatrix.rows()!=K_*M_)||(fMatrix.cols()!=M_))
+    {
+        cout<<"Initialization of the A matrices is wrong!!"<<endl;
+        cout<<"A_k: "<< endl << fMatrix<< endl;
+        cout<<"[Proposed Dimensionality] K : "<<K_<<" M:"<<M_<<endl;
+        cout<<"[Actual Dimensionality] K : "<< fMatrix.cols()/M_ <<" M:" << fMatrix.rows() << endl;
+        ERROR();
+    }
+    int j = 0;
+    for(int s=0; s<K_; s++ ){
+        for(int i=0; i<M_; i++ ){
+            A_Matrix_[s].row(i)=fMatrix.row(j);
+            j++;
+        }
+    }
+}
+
+/*********************************************************/
+/* Initialization functions with vector<double> as input */
+/*********************************************************/
+
+void lpvDS::initialize_Priors_vec(const vector<double> Priors_vec){
+    cout<<"** Initializing Priors **"<< endl;
+    if (Priors_vec.size() != K_){
+        cout<<"Initialization of Prior is wrong."<<endl;
+        cout<<"Number of components is: "<<K_<<endl;
+        cout<<"Dimension of states of Prior is: "<<Priors_vec.size()<<endl;
+        ERROR();
+    }
+
+    for (int k=0; k<K_; k++)
+        Prior_[k] = Priors_vec[k];
+}
+
+
+void lpvDS::initialize_Mu_vec(const vector<double> Mu_vec){
+
+    cout<<"** Initializing Mu **"<< endl;
+    if (Mu_vec.size() != K_*M_){
+        cout<<"Initialization of Mean is wrong."<<endl;
+        cout<<"Size of vector should be K ("<<K_ << ")*M("<< M_<< ") =" << K_*M_ <<endl;
+        cout<<"Given vector is of size "<< Mu_vec.size() << endl;
+        ERROR();
+    }
+
+
+    for(int k=0; k<K_; k++ ){
+        VectorXd Mu_k; Mu_k.resize(M_); Mu_k.setZero();
+        for (int m = 0; m < M_; m++)
+            Mu_k[m] = Mu_vec[k * M_ + m];
+        Mu_[k]=Mu_k;
+    }
+
+    /* For Debugging */
+//    for(int k=0; k<K_; k++ )
+//        cout << "Mu["<< k << "]"<< endl << Mu_[k] << endl;
+}
+
+
+void lpvDS::initialize_Sigma_vec(const vector<double> Sigma_vec){
+
+    cout<<"** Initializing Sigma **"<< endl;
+    if (Sigma_vec.size() != K_*M_*M_){
+        cout<<"Initialization of Sigma is wrong."<<endl;
+        cout<<"Size of vector should be K ("<<K_ << ")*M("<< M_<< ")*M(" << M_<< ") =" << K_*M_*M_ <<endl;
+        cout<<"Given vector is of size "<< Sigma_vec.size() << endl;
+        ERROR();
+    }
+
+    for(int k=0; k<K_; k++ ){
+        MatrixXd Sigma_k; Sigma_k.resize(M_,M_); Sigma_k.setZero();
+        for (int row = 0; row < M_; row++) {
+            for (int col = 0; col < M_; col++) {
+                int ind = k * M_ * M_ + row * M_ + col;
+                Sigma_k(col,row)  = Sigma_vec[ind];
+            }
+        }
+        Sigma_[k] = Sigma_k;
+    }
+
+    /* For Debugging */
+//    for(int k=0; k<K_; k++ )
+//        cout << "Sigma["<< k << "]"<< endl << Sigma_[k] << endl;
+
+}
+
+
+void lpvDS::initialize_A_vec(const vector<double> A_vec){
+    cout<<"** Initializing A **"<< endl;
+    if (A_vec.size() != K_*M_*M_){
+        cout<<"Initialization of A-matrices is wrong."<<endl;
+        cout<<"Size of vector should be K ("<<K_ << ")*M("<< M_<< ")*M(" << M_<< ") =" << K_*M_*M_ <<endl;
+        cout<<"Given vector is of size "<< A_vec.size() << endl;
+        ERROR();
+    }
+
+    for(int k=0; k<K_; k++ ){
+        MatrixXd A_k; A_k.resize(M_,M_); A_k.setZero();
+        for (int row = 0; row < M_; row++) {
+            for (int col = 0; col < M_; col++) {
+                int ind = k * M_ * M_ + row * M_ + col;
+                A_k(col,row)  = A_vec[ind];
+            }
+        }
+        A_Matrix_[k] = A_k;
+    }
+
+
+    /* For Debugging */
+//    for(int k=0; k<K_; k++ )
+//        cout << "A["<< k << "]"<< endl << A_Matrix_[k] << endl;
+}
+
+
+
+/************************************************************/
+/* Initialization functions with path to text file as input */
+/************************************************************/
 
 void lpvDS::initialize_A(const char  *path_A_){
 
@@ -235,12 +361,15 @@ void lpvDS::initialize_gamma(const char  *path_prior_,const char  *path_mu_,cons
 }
 
 
+/****************************************/
+/*     Actual computation functions     */
+/****************************************/
+
 MatrixXd lpvDS::compute_A(VectorXd X){
 
-	/* Calculating the matrix A */
+    /* Calculating the weighted sum of A matrices */
 
-	if ((X.rows()!=M_))
-	{
+	if ((X.rows()!=M_)){
 		cout<<"The dimension of X in compute_A is wrong."<<endl;
 		cout<<"Dimension of states is: "<<M_<<endl;
 		cout<<"Dimension of X "<<X.rows()<<endl;
@@ -248,58 +377,37 @@ MatrixXd lpvDS::compute_A(VectorXd X){
 	}
 
 	MatrixXd A; A.resize(M_,M_);A.setZero();
-
 	if (K_>1)
-	{
-		gamma_=compute_gamma(X);
-	}
+        gamma_= compute_gamma(X);
 	else
-	{
 		gamma_(K_-1)=1;
-	}
 
 	for (int i=0;i<K_;i++)
-	{
-		A=A+A_Matrix_[i]*gamma_(i);
-	}
+        A = A + A_Matrix_[i]*gamma_(i);
 
 	return A;
 }
 
-VectorXd lpvDS::compute_gamma(VectorXd X)
-{
-	VectorXd Theta;Theta.resize(K_);Theta.setZero();
+VectorXd lpvDS::compute_gamma(VectorXd X){
+    VectorXd gamma;
+    gamma.resize(K_);
+    gamma.setZero();
 
 	for (int i=0;i<K_;i++)
-	{
-		Theta(i)=Prior_[i]*GaussianPDF(X,Mu_[i],Sigma_[i]);
-	}
-	double sum=Theta.sum();
-	if (sum<1e-100)
-	{
+        gamma(i)=Prior_[i]*GaussianPDF(X,Mu_[i],Sigma_[i]);
+
+    double sum = gamma.sum();
+	if (sum<1e-100){
 		for (int i=0;i<K_;i++)
-		{
-			Theta(i)=1.0/K_;
-		}
+            gamma(i)=1.0/K_;
 	}
 	else
-	{
-		Theta=Theta/sum;
-	}
+        gamma = gamma/sum;
 
-	return Theta;
+    return gamma;
 }
 
-void lpvDS::ERROR()
-{
-	while(ros::ok())
-	{
-
-	}
-}
-
-double lpvDS::GaussianPDF(VectorXd x,VectorXd Mu,MatrixXd Sigma)
-{
+double lpvDS::GaussianPDF(VectorXd x, VectorXd Mu, MatrixXd Sigma){
 
 	double p;
 	MatrixXd gfDiff;gfDiff.resize(1,M_);
@@ -310,16 +418,17 @@ double lpvDS::GaussianPDF(VectorXd x,VectorXd Mu,MatrixXd Sigma)
 
 	detSigmaII=Sigma.determinant();
 	SigmaIIInv=Sigma.inverse();
-	if (detSigmaII<0)
-	{
-		detSigmaII=0;
-	}
+
+    if (detSigmaII<0)
+        detSigmaII=0;
+
 	gfDiff=(x - Mu).transpose();
 	gfDiff_T=x - Mu;
 	gfDiffp =gfDiff*SigmaIIInv* gfDiff_T;
 	gfDiffp(0,0)=fabs(0.5*gfDiffp(0,0));
 	p = exp(-gfDiffp(0,0)) / sqrt(pow(2.0*PI, M_)*( detSigmaII +1e-50));
-	return p;
+
+    return p;
 }
 
 
