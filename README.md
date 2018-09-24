@@ -61,7 +61,7 @@ Or you can read the parameter files using the ``fileUtils`` class and initialize
 ```
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
-- For Yaml file: We use the ROS parameter server which reads a yaml file containing each of the parameters mentioned above in  ``vector<double>`` format from the C++ standard library.
+- For Yaml file [Recommended]: We use the ROS parameter server which reads a yaml file containing each of the parameters mentioned above in  ``vector<double>`` format from the C++ standard library.
 
 ```C++
 vector<double> Priors = ...; /* Vector of Priors */
@@ -118,12 +118,38 @@ Testing Accuracy of model...
 Average Estimation Error (Norm of predicted Matlab and C++ velocities): 0.00401846
 ```
 
-### Testing the class with yaml file!
+### [Recommended] Testing the class with yaml file! 
 To load parameters from a yaml file into the ROS parameter server, one must create a node that reads such yaml file. An example of such node is provided in ```src/test_lpvDS_node.cpp``` and can be run with the following launch file:
 ```
 $ roslaunch lpvDS run_testLPVDS_node.launch
 ```
-This node will do the same as the previous testing script, hence, you must provide the path of the 
+This node will do the same as the previous testing script. The path to the testing model is already provided in the launch file. Hence, by running the above command you should see the following:
+```
+Model path: /home/nbfigueroa/proj/catkin_ws_lags/src/lpvDS-lib/models/CShape-bottom-pqlf/
+Number of Components K: 7
+Dimensionality of state M: 3
+Priors: 
+0.0480226 0.0635593 0.0786252 0.0376648 0.0550847 0.118644 0.0983992 
+Mu: 
+-0.699769 0.245762 0.0777207 -0.434051 0.217584 0.343617 -0.608964 -0.00479354 0.0474029 -0.478294 0.31798 0.259048 -0.444281 0.141656 0.160792 -0.681747 0.0744 0.379855 -0.553359 0.143088 0.402569 
+Sigma [0]: 
+0.00597166 0.00124721 0.00131495 0.00124721 0.00428135 0.000868572 0.00131495 0.000868572 0.003528 
+A [0]: 
+0.249952 -0.191665 -0.241171 1.34761 -0.0730141 -0.353369 0.301089 -0.330761 -0.391286 
+Priors: 
+-0.689617 0.0712412 0.377028 
+Initialized an M:3 dimensional GMM-based LPV-DS with K: 7 Components
+** Initializing Priors **
+** Initializing Mu **
+** Initializing Sigma **
+** Initializing A **
+[File Dimensionality] row 6 2215
+[File Dimensionality] row 3 2215
+Testing Accuracy of model...
+Average Estimation Error (Norm of predicted Matlab and C++ velocities): 0.00402145
+```
+
+
 
 **References**     
 > [1] Mirrazavi Salehian, S. S., Khoramshahi, M. and Billard, A. (2016) A Dynamical System Approach for Catching Softly a Flying Object: Theory and Experiment. in IEEE Transactions on Robotics, vol. 32, no. 2, pp. 462-471, April 2016.  
