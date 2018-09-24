@@ -43,6 +43,7 @@ public:
 
         lpvDS(const char  *path_dims);
         lpvDS(const char  *path_dims, const char  *path_prior,const char  *path_mu,const char  *path_sigma, const char  *path_A);
+        lpvDS(int K, int M, const MatrixXd Priors_fMatrix, const MatrixXd Mu_fMatrix, const MatrixXd Sigma_fMatrix, const MatrixXd A_fMatrix );
         ~lpvDS(void);
 
         void        initialize_A(const char  *path_A);
@@ -50,10 +51,13 @@ public:
 
         MatrixXd    compute_A(VectorXd xi);
         VectorXd    compute_gamma(VectorXd xi);
-        VectorXd    compute_f(VectorXd xi, VectorXd xi_att);
 
 private:
         void        initialize_params();
+        void        initialize_A(const MatrixXd fMatrix);
+        void        initialize_Priors(const MatrixXd fMatrix);
+        void        initialize_Mu(const MatrixXd fMatrix);
+        void        initialize_Sigma(const MatrixXd fMatrix);
         double 		GaussianPDF(VectorXd x,VectorXd Mu,MatrixXd Sigma);
         fileUtils   fileUtils_;
         void 	 	ERROR();
