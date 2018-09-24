@@ -22,10 +22,11 @@
 #include "ros/ros.h"
 #include "utils.h"
 
+
 using namespace std;
 using namespace Eigen;
 
-const double PI = 3.14159265358979323846264338327950288419716939937510;
+const double PI_ = 3.14159265358979323846264338327950288419716939937510;
 
 class lpvDS
 {	
@@ -51,6 +52,7 @@ public:
         void        initialize_gamma(const char  *path_prior, const char  *path_mu, const char  *path_sigma);
 
         MatrixXd    compute_A(VectorXd xi);
+        VectorXd    compute_f(VectorXd xi, VectorXd att);
         VectorXd    compute_gamma(VectorXd xi);
 
 private:

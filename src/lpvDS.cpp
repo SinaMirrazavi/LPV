@@ -361,6 +361,17 @@ void lpvDS::initialize_gamma(const char  *path_prior_,const char  *path_mu_,cons
 }
 
 
+VectorXd   lpvDS::compute_f(VectorXd xi, VectorXd att){
+    MatrixXd A_matrix; A_matrix.resize(M_,M_); A_matrix.setZero();
+    VectorXd xi_dot;     xi_dot.resize(M_);    xi_dot.setZero();
+
+    A_matrix = compute_A(xi);
+    xi_dot = A_matrix*(xi - att);
+
+    return xi_dot;
+}
+
+
 /****************************************/
 /*     Actual computation functions     */
 /****************************************/
@@ -426,7 +437,7 @@ double lpvDS::GaussianPDF(VectorXd x, VectorXd Mu, MatrixXd Sigma){
 	gfDiff_T=x - Mu;
 	gfDiffp =gfDiff*SigmaIIInv* gfDiff_T;
 	gfDiffp(0,0)=fabs(0.5*gfDiffp(0,0));
-	p = exp(-gfDiffp(0,0)) / sqrt(pow(2.0*PI, M_)*( detSigmaII +1e-50));
+	p = exp(-gfDiffp(0,0)) / sqrt(pow(2.0*PI_, M_)*( detSigmaII +1e-50));
 
     return p;
 }

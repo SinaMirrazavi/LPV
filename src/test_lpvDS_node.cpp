@@ -144,10 +144,13 @@ int main(int argc, char **argv)
     VectorXd  est_error; est_error.resize(samples);
     for (int i=0; i<samples; i++){
 
-        /* Computing desired velocity */
+        /* Computing desired velocity manually*/
         xi_ref_test = xi_ref.col(i);
         A_matrix = lpvDS_.compute_A(xi_ref_test);
         xi_dot_test = A_matrix*(xi_ref_test - att);
+
+        /* Computing desired velocity directly*/
+        xi_dot_test = lpvDS_.compute_f(xi_ref_test, att);
 
         /* Computing error between this estimate and MATLAB */
         xi_dot_mat = xi_dot.col(i);
