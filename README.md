@@ -37,11 +37,12 @@ Examples of these files are provided in the ``models/`` folder. To generate thes
 
 - For text files, you have multiple initialization options:
 ```C++
+  /* Instantiate an LPV-DS class Option 1 */
   lpvDS lpvDS_(path_dim.c_str());
   lpvDS_.initialize_gamma(path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str());
   lpvDS_.initialize_A(path_A.c_str());
-```
-```C++
+  
+  /* Instantiate an LPV-DS class Option 2 */
     lpvDS lpvDS_ (path_dim.c_str(), path_Priors.c_str(), path_Mu.c_str(), path_Sigma.c_str(), path_A.c_str());
 ```
 Or you can read the parameter files using the ``fileUtils`` class available in this same repo and initialize the lpvDS class as follows:
