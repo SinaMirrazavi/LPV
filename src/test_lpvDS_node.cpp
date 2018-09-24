@@ -15,29 +15,39 @@ vector<double> Mu;
 vector<double> Sigma;
 vector<double> A;
 vector<double> attractor;
+string path_model;
 
 bool parseParams(const ros::NodeHandle& nh) {
     bool ret = true;
+
+
+    if (!nh.getParam("model_path", path_model)) {
+        ROS_ERROR("Couldn't retrieve model_path. ");
+        ret = false;
+    } else {
+        cout << "Model path: "<< path_model << endl;
+    }
+
 
     if (!nh.getParam("K", K))   {
         ROS_ERROR("Couldn't retrieve the number of guassians. ");
         ret = false;
     } else {
-        ROS_INFO_STREAM("Number of Components K: "<< (int)K);
+        cout << "Number of Components K: "<< (int)K << endl;
     }
 
     if (!nh.getParam("M", M))  {
         ROS_ERROR("Couldn't retrieve dimension of state. ");
         ret = false;
     } else {
-        ROS_INFO_STREAM("Dimensionality of state M: "<< (int)M);
+        cout << "Dimensionality of state M: "<< (int)M << endl;
     }
 
     if (!nh.getParam("Priors", Priors))   {
         ROS_ERROR("Couldn't retrieve Priors. ");
         ret = false;
     } else {
-        ROS_INFO_STREAM("Priors: ");
+        cout << "Priors: " << endl;
         for (int k = 0; k< int(K); k++)
             cout << Priors.at(k) << " ";
         cout << endl;
@@ -47,7 +57,7 @@ bool parseParams(const ros::NodeHandle& nh) {
         ROS_ERROR("Couldn't retrieve Mu. ");
         ret = false;
     } else {
-        ROS_INFO_STREAM("Mu: ");
+        cout << "Mu: " << endl;
         for (int m = 0; m< int(K)*int(M); m++)
             cout << Mu.at(m) << " ";
         cout << endl;
@@ -57,7 +67,7 @@ bool parseParams(const ros::NodeHandle& nh) {
         ROS_ERROR("Couldn't retrieve Sigma. ");
         ret = false;
     } else {
-        ROS_INFO_STREAM("Sigma [0]: ");
+        cout << "Sigma [0]: " << endl;
         for (int m = 0; m< int(M)*int(M); m++)
             cout << Sigma.at(m) << " ";
         cout << endl;
@@ -67,7 +77,7 @@ bool parseParams(const ros::NodeHandle& nh) {
         ROS_ERROR("Couldn't retrieve A. ");
         ret = false;
     } else {
-        ROS_INFO_STREAM("A [0]: ");
+        cout << "A [0]: " << endl;
         for (int m = 0; m< int(M)*int(M); m++)
             cout << A.at(m) << " ";
         cout << endl;
@@ -77,7 +87,7 @@ bool parseParams(const ros::NodeHandle& nh) {
         ROS_ERROR("Couldn't retrieve attractor. ");
         ret = false;
     } else {
-        ROS_INFO_STREAM("Priors: ");
+        cout << "Priors: " << endl;
         for (int m = 0; m< int(M); m++)
             cout << attractor.at(m) << " ";
         cout << endl;
@@ -104,7 +114,6 @@ int main(int argc, char **argv)
 
 
     /* Testing the LPV-DS on training data from MATLAB */
-    string path_model  = "/home/nbfigueroa/proj/catkin_ws_lags/src/lpvDS-lib/models/CShape-bottom-pqlf/";
     string path_data   = path_model +  "Data";
     string path_xi_dot = path_model +  "xi_dot";
     fileUtils fileUtils_;
