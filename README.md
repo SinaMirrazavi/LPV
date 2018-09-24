@@ -47,18 +47,18 @@ Examples of these files are provided in the ``models/`` folder. To generate thes
 ```
 Or you can read the parameter files using the ``fileUtils`` class available in this same repo and initialize the lpvDS class as follows:
 ```C++
-    fileUtils fileUtils_;
-    MatrixXd dim, Priors, Mu, Sigma, A;
-    dim     = fileUtils_.readMatrix(path_dim.c_str());
-    Priors  = fileUtils_.readMatrix(path_Priors.c_str());
-    Mu      = fileUtils_.readMatrix(path_Mu.c_str());
-    Sigma   = fileUtils_.readMatrix(path_Sigma.c_str());
-    A       = fileUtils_.readMatrix(path_A.c_str());
-    int K = (int)dim(0,0);
-    int M = (int)dim(1,0);
-    lpvDS lpvDS_ (K, M, Priors, Mu, Sigma, A);
+   /* Instantiate an LPV-DS class Option 3 */
+   fileUtils fileUtils_;
+   MatrixXd dim, Priors, Mu, Sigma, A;
+   dim     = fileUtils_.readMatrix(path_dim.c_str());
+   Priors  = fileUtils_.readMatrix(path_Priors.c_str());
+   Mu      = fileUtils_.readMatrix(path_Mu.c_str());
+   Sigma   = fileUtils_.readMatrix(path_Sigma.c_str());
+   A       = fileUtils_.readMatrix(path_A.c_str());
+   int K = (int)dim(0,0);
+   int M = (int)dim(1,0);
+   lpvDS lpvDS_ (K, M, Priors, Mu, Sigma, A);
 ```
-
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
 - For Yaml file: We assume that a Yaml file has been read via the ROS parameter server and each parameters is of ``std::vector<double>`` format
