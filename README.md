@@ -61,7 +61,7 @@ Or you can read the parameter files using the ``fileUtils`` class and initialize
 ```
 Where ``K`` is the number of the Gaussian components and ``M`` is the dimension of the system.
 
-- For Yaml file: We assume that a Yaml file has been read via the ROS parameter server and each parameters is of ``vector<double>`` format from the C++ standard library.
+- For Yaml file: We use the ROS parameter server which reads a yaml file containing each of the parameters mentioned above in  ``vector<double>`` format from the C++ standard library.
 
 ```C++
 vector<double> Priors = ...; /* Vector of Priors */
@@ -72,9 +72,13 @@ int K = ...;                /* Number of components */
 int M = ...;                /* Dimensionality of the state */
 lpvDS lpvDS_(K,M, Priors, Mu, Sigma, A)
 ```
+An example of such yaml file can be found in ```models/```. Also, to generate your own yaml files you can  follow the ``demo_learn_lpvDS.m`` script in the [ds-opt](https://github.com/nbfigueroa/ds-opt) package, specifically, the function
+```Matlab
+function save_lpvDS_to_Yaml(DS_name, pkg_dir,  ds_gmm, A_k, att, x0_all, dt)
+```
 
 ### In the loop:
-Once you have the lpvDS class instantiated and initialiazed in any of the available formats, you can use it in the loop as follows:
+Once you have the lpvDS class instantiated and initialized in any of the available formats, you can use it in the loop as follows:
 
 ```C++
 VectorXd att = ...;                        /* attractor */
@@ -83,7 +87,7 @@ Vextor Xd xi_dot;                          /* desired velocity */
 MatrixXd  A_matrix = lpv_DS_.compute_A(xi) /* computing the weight sum of A matrices */
 xi_dot = A_matrix*(xi - att);              /* computing the desired velocity */
 ```
-This is a minimalistic code, proper resize of vectors and matrices must be implemented.
+This is a minimalistic code, proper resizing of vectors and matrices must be implemented.
 
 ---
 ### Testing the class with txt files
@@ -112,8 +116,15 @@ Initialized an M:3 dimensional GMM-based LPV-DS with K: 7 Components
 Testing Accuracy of model...
 ...
 Average Estimation Error (Norm of predicted Matlab and C++ velocities): 0.00401846
-
 ```
+
+### Testing the class with yaml file!
+To load parameters from a yaml file into the ROS parameter server, one must create a node that reads such yaml file. An example of such node is provided in ```src/test_lpvDS_node.cpp``` and can be run with the following launch file:
+```
+$ roslaunch lpvDS run_testLPVDS_node.launch
+```
+This node will do the same as the previous testing script, hence, you must provide the path of the 
+
 **References**     
 > [1] Mirrazavi Salehian, S. S., Khoramshahi, M. and Billard, A. (2016) A Dynamical System Approach for Catching Softly a Flying Object: Theory and Experiment. in IEEE Transactions on Robotics, vol. 32, no. 2, pp. 462-471, April 2016.  
 > [2] Mirrazavi Salehian, S. S. (2018) Compliant control of Uni/ Multi- robotic arms with dynamical systems. PhD Thesis  
