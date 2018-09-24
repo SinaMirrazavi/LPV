@@ -68,8 +68,14 @@ lpvDS lpvDS_test_(int K,int M,std::vector<double> *Priors_, std::vector<double> 
 ```
 
 ### In the loop:
+Once you have the lpvDS class instantiated and initialiazed in any of the available formats, you can use it in the loop as follows:
 ```
-LPV.Calculate_A(VectorXd X)
+VectorXd att; /* attractor */
+VectorXd xi, /* current state */
+Vextor Xd xi_dot; xi_dot.resize(M); /* desired velocity */
+MatrixXd  A_matrix = lpv_DS_.compute_A(xi) /* computing the weight sum of A matrices */
+xi_dot = A_matrix*(xi - att);   /* computing the desired velocity */
+
 ```
 ---
 ### Testing the class
