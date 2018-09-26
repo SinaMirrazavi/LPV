@@ -15,7 +15,9 @@ The whole learning scheme is provided in [ds-opt](https://github.com/nbfigueroa/
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-CShape-bottom_lpvO3.png"  width="350"><img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-Sink_lpvO3.png"  width="350"></>
 
 
-while ensuring global asymptotic stability. To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. This package supports inputs from [eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) and [mathlib](https://github.com/epfl-lasa/mathlib) library.
+while ensuring global asymptotic stability. To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. 
+
+**Note**: This package supports inputs from [eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) and [mathlib](https://github.com/epfl-lasa/mathlib) library.
 
 ### Installation (Catkin package)
 By following these instructions, we assume you have a ROS environment and use catkin workspace to compile code. 
