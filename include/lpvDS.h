@@ -22,6 +22,8 @@
 #include "ros/ros.h"
 #include "utils.h"
 
+/* To used the class in the ds_motino_generators package */
+#include "MathLib.h"
 
 using namespace std;
 using namespace Eigen;
@@ -51,9 +53,10 @@ public:
         void        initialize_A(const char  *path_A);
         void        initialize_gamma(const char  *path_prior, const char  *path_mu, const char  *path_sigma);
 
-        MatrixXd    compute_A(VectorXd xi);
-        VectorXd    compute_f(VectorXd xi, VectorXd att);
-        VectorXd    compute_gamma(VectorXd xi);
+        MatrixXd         compute_A(VectorXd xi);
+        VectorXd         compute_f(VectorXd xi, VectorXd att);
+        MathLib::Vector  compute_f(MathLib::Vector xi, MathLib::Vector att);
+        VectorXd         compute_gamma(VectorXd xi);
 
 private:
         void        setup_params();

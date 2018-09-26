@@ -5,6 +5,7 @@ set(CMAKE_CXX_FLAGS "-std=c++11")
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  mathlib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -49,7 +50,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES lpvDS
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS roscpp mathlib
 #  DEPENDS system_lib
 )
 
@@ -67,9 +68,9 @@ set(H_FILES     ${INCLUDE_DIR}/lpvDS.h
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ library
-set(SRCS src/lpvDS.cpp
-         src/utils.cpp
-         src/GMM.cpp)
+set(SRCS src/lpvDS/lpvDS.cpp
+         src/lpvDS/utils.cpp
+         src/lpvDS/GMM.cpp)
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME} ${H_FILES}  ${SRCS})

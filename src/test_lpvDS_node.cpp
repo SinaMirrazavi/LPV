@@ -112,7 +112,6 @@ int main(int argc, char **argv)
     /* Instantiate lpv-DS Model with parameters read from Yaml file*/
     lpvDS lpvDS_((int)K, (int)M, Priors, Mu, Sigma, A);
 
-
     /* Testing the LPV-DS on training data from MATLAB */
     string path_data   = path_model +  "Data";
     string path_xi_dot = path_model +  "xi_dot";
