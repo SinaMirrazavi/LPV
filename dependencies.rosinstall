@@ -1,0 +1,3 @@
+- git:
+    local-name: mathlib
+    uri: git@github.com:epfl-lasa/mathlib.git

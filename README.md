@@ -7,22 +7,26 @@ This version of the LPV library focuses on the formulation proposed in [3] where
   
 is learned from demonstrations in a decoupled manner. Where the GMM parameters <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/theta_gamma.gif"> used to parametrize <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/gamma.gif"> are estimated via the physically-consistent GMM approach proposed in [3] and provided in [phys-gmm](https://github.com/nbfigueroa/phys-gmm) and the DS parameters <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/DS_params.gif"> are estimated by solving a semi-definite optimization problem that ensures global asymptotic stability of the system via constraints derived from either a:
 - QLF (Quadratic Lyapunov Function): <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_qlf.gif">
-- P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">
+- P-QLF(Parametrized QLF):  <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/stab_pqlf.gif">  
+
 The whole learning scheme is provided in [ds-opt](https://github.com/nbfigueroa/ds-opt). This formulation and learning approach enables the accurate encoding of highly non-linear, non-monotic trajectories, as the ones below:
 
 <p align="center">
 <img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-CShape-bottom_lpvO3.png"  width="350"><img src="https://github.com/nbfigueroa/LPV/blob/nadia/img/3D-Sink_lpvO3.png"  width="350"></>
 
 
-while ensuring global asymptotic stability. To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package.
+while ensuring global asymptotic stability. To learn DS with this formulation and with any of the two Lyapunov constraints defined above go to the [ds-opt](https://github.com/nbfigueroa/ds-opt) package. 
+
+**Note**: This package supports inputs from [eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) and [mathlib](https://github.com/epfl-lasa/mathlib) libraries.
 
 ### Installation (Catkin package)
 By following these instructions, we assume you have a ROS environment and use catkin workspace to compile code. 
-Clone this respository in your ```./src``` folder and make sure that you have the [eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) library. Then, compile the package
+Clone this respository in your ```./src``` folder and make sure that you have both the [eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) and [mathlib](https://github.com/epfl-lasa/mathlib) libraries installed. Then, compile the package
 ```
 $ cd ~/catkin_ws/
 $ catkin_make
 ```
+
 ## Usage
 First and foremost, one must have a GMM-based LPV-DS model, which requires the following parameters:
 - GMM parameters: ``Priors``, ``Mu``,``Sigma``
@@ -78,14 +82,23 @@ function save_lpvDS_to_Yaml(DS_name, pkg_dir,  ds_gmm, A_k, att, x0_all, dt)
 
 ### In the loop:
 Once you have the lpvDS class instantiated and initialized in any of the available formats, you can use it in the loop as follows:
+- For ``Eigen::VectorXd`` type inputs:
 
 ```C++
 VectorXd att = ...;                        /* attractor */
 VectorXd xi  = ...;                        /* current state */
 Vextor Xd xi_dot;                          /* desired velocity */
+
+ /* Option 1: Computing desired velocity manually*/
 MatrixXd  A_matrix = lpv_DS_.compute_A(xi) /* computing the weight sum of A matrices */
 xi_dot = A_matrix*(xi - att);              /* computing the desired velocity */
+
+/* Option 2: Computing desired velocity directly*/
+xi_dot = lpvDS_.compute_f(xi_ref_test, att);
 ```
+- For ``Mathlib::vector`` type inputs:
+
+
 This is a minimalistic code, proper resizing of vectors and matrices must be implemented.
 
 ---
