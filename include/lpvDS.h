@@ -1,10 +1,10 @@
 /*
- * Copyright (C) 2016 Learning Algorithms and Systems Laboratory, EPFL, Switzerland
- * Author: Sina Mirrazavi
- * email:   sina.mirrazavi@epfl.ch
+ * Copyright (C) 2018 Learning Algorithms and Systems Laboratory, EPFL, Switzerland
+ * Author:  Sina Mirrazavi and Nadia Figueroa
+ * email:   {sina.mirrazavi,nadia.figueroafernandez}@epfl.ch
  * website: lasa.epfl.ch
  *
- * Later modified by Nadia Figueroa
+ * This work was supported by the EU project Cogimon H2020-ICT-23-2014.
  *
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
@@ -22,7 +22,7 @@
 #include "ros/ros.h"
 #include "utils.h"
 
-/* To used the class in the ds_motino_generators package */
+/* To used the class in the ds_motion_generators package */
 #include "MathLib.h"
 
 using namespace std;
