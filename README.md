@@ -87,7 +87,7 @@ Once you have the lpvDS class instantiated and initialized in any of the availab
 ```C++
 VectorXd att = ...;                        /* attractor */
 VectorXd xi  = ...;                        /* current state */
-Vextor Xd xi_dot;                          /* desired velocity */
+VextorXd xi_dot;                           /* desired velocity */
 
  /* Option 1: Computing desired velocity manually*/
 MatrixXd  A_matrix = lpv_DS_.compute_A(xi) /* computing the weight sum of A matrices */
@@ -98,6 +98,16 @@ xi_dot = lpvDS_.compute_f(xi_ref_test, att);
 ```
 - For ``Mathlib::vector`` type inputs:
 
+```C++
+MathLib::Vector att = ... ;
+
+MathLib::Vector att = ...;                        /* attractor */
+MathLib::Vector xi  = ...;                        /* current state */
+MathLib::Vector xi_dot;                           /* desired velocity */
+
+/* Computing desired velocity directly */
+xi_dot = lpvDS_.compute_f(xi, att)
+```
 
 This is a minimalistic code, proper resizing of vectors and matrices must be implemented.
 
