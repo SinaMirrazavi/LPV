@@ -26,8 +26,9 @@ Clone this respository in your ```./src``` folder and make sure that you have bo
 $ cd ~/catkin_ws/
 $ catkin_make
 ```
+---
 
-## Usage
+### Usage
 First and foremost, one must have a GMM-based LPV-DS model, which requires the following parameters:
 - GMM parameters: ``Priors``, ``Mu``,``Sigma``
 - DS parameters:  ``A_k``,``b_k``
@@ -80,7 +81,7 @@ An example of such yaml file can be found in ```models/```. Also, to generate yo
 function save_lpvDS_to_Yaml(DS_name, pkg_dir,  ds_gmm, A_k, att, x0_all, dt)
 ```
 
-### In the loop:
+#### In the loop:
 Once you have the lpvDS class instantiated and initialized in any of the available formats, you can use it in the loop as follows:
 - For ``Eigen::VectorXd`` type inputs:
 
