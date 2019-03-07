@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <launch>
 	<node name="test_lpvDS_node" pkg="lpvDS" type="test_lpvDS_node" output="screen">
-		<param name="model_path"                  value="$(find lpvDS)/models/CShape-bottom-pqlf/"/>
-		<rosparam command="load" file="$(find lpvDS)/models/CShape-bottom-pqlf.yml"/>
+		<param name="model_path"                  value="$(find lpvDS)/models/coManip-DS-1/"/>
+		<rosparam command="load" file="$(find lpvDS)/models/coManip-DS-1.yml"/>
 	</node>
 </launch>

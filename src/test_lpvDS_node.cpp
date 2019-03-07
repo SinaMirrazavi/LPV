@@ -142,22 +142,21 @@ int main(int argc, char **argv)
     cout << "Testing Accuracy of model..." << endl;
 
     /* Fill in attractor */
-    VectorXd att; att.resize(3);
+    VectorXd att; att.resize(M);
     for (int i = 0; i<(int)M; i++)
         att[i] = attractor.at(i);
 
     /* Fill in reference trajectories */
-    MatrixXd xi_ref;  xi_ref.resize(3,samples);
-    xi_ref.row(0)     = Data.row(0);
-    xi_ref.row(1)     = Data.row(1);
-    xi_ref.row(2)     = Data.row(2);
+    MatrixXd xi_ref;  xi_ref.resize(M,samples);
+    for (int i=0; i<M; i++)
+        xi_ref.row(i) = Data.row(i);
 
     /* Compute estimated velocities from model */
-    VectorXd xi_ref_test;  xi_ref_test.resize(3);
-    VectorXd xi_dot_test;  xi_dot_test.resize(3);
-    VectorXd xi_dot_mat;   xi_dot_mat.resize(3);
-    VectorXd xi_dot_error; xi_dot_error.resize(3);
-    MatrixXd A_matrix; A_matrix.resize(3,3);
+    VectorXd xi_ref_test;  xi_ref_test.resize(M);
+    VectorXd xi_dot_test;  xi_dot_test.resize(M);
+    VectorXd xi_dot_mat;   xi_dot_mat.resize(M);
+    VectorXd xi_dot_error;  xi_dot_error.resize(M);
+    MatrixXd A_matrix; A_matrix.resize(M,M);
     VectorXd  est_error; est_error.resize(samples);
     for (int i=0; i<samples; i++){
 
@@ -179,5 +178,9 @@ int main(int argc, char **argv)
     cout << "Average Estimation Error" << " (Norm of predicted Matlab and C++ velocities): " << est_error.mean() << endl;
 
 
+    // Stop the node's resources
+    ros::shutdown();
+    // Exit tranquilly
     return 0;
+
 }
